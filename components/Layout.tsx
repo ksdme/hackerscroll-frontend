@@ -14,11 +14,9 @@ export default function Layout(props: Props) {
         </div>
       </nav>
 
-      <div className="flex justify-center py-8">
-        <main className="container">
-          {children}
-        </main>
-      </div>
+      <main className="container mx-auto py-8">
+        {children}
+      </main>
     </div>
   )
 }
