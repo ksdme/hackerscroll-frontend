@@ -13,24 +13,24 @@ export default function Post(props: Props) {
 
   return (
     <div className="flex flex-col p-4 gap-y-4 divide-y divide-gray-200">
-      <div className="flex justify-between items-center cursor-pointer">
+      <div className="flex justify-between items-center flex-wrap gap-y-4 cursor-pointer">
         <div className="flex gap-x-2">
-          <div className="text-gray-400 text-lg">
+          <div className="text-gray-400 text-base md:text-lg">
             {index}.
           </div>
 
           <div className="flex flex-col">
-            <h3 className="text-lg">
+            <h3 className="text-base md:text-lg">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </h3>
 
-            <h4 className="text-base text-gray-400">
+            <h4 className="pt-1 text-sm text-gray-400">
               by kilariteja
             </h4>
           </div>
         </div>
 
-        <div className="flex gap-x-4">
+        <div className="w-full md:w-auto flex justify-center gap-x-4">
           <Button
             icon={ArrowsExpandIcon}
             label="Expand"
@@ -49,9 +49,10 @@ export default function Post(props: Props) {
 
       <div
         className="
-          prose prose-img:rounded prose-a:text-blue-500 hover:prose-a:text-blue-600 mx-auto max-w-3xl
-          tracking-wide leading-8 prose-code:font-monospace prose-code:before:hidden prose-code:after:hidden
-          prose-code:bg-black prose-code:text-white prose-code:font-normal prose-code:rounded prose-code:px-1
+          w-full max-w-3xl break-words mx-auto prose prose-img:rounded prose-a:text-blue-500 hover:prose-a:text-blue-600
+          tracking-wide md:leading-8 prose-code:font-monospace prose-code:before:hidden prose-code:after:hidden
+          prose-code:bg-black prose-code:text-white prose-code:font-normal prose-code:rounded
+          prose-code:px-1 prose-code:mx-1 prose-hr:my-6 md:prose-hr:my-8
         "
       >
         <div id="readability-page-1" className="page">
