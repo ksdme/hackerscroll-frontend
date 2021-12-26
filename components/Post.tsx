@@ -463,7 +463,7 @@ function ArticleContent() {
 }
 
 /*
-  Renders YouTube videos.
+  Renders YouTube video link.
 */
 function YouTubeVideoContent() {
   return (
