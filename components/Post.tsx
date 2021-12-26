@@ -69,7 +69,7 @@ export default function Post(props: Props) {
       {
         expanded && (
           <div>
-            <ArticleContent />
+            <YouTubeVideoContent />
           </div>
         )
       }
@@ -458,6 +458,23 @@ function ArticleContent() {
               </i>
           </p>
       </div>
+    </div>
+  )
+}
+
+/*
+  Renders YouTube videos.
+*/
+function YouTubeVideoContent() {
+  return (
+    <div className="relative rounded overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+      <iframe 
+        className="w-full h-full absolute top-0 left-0"
+        src="https://www.youtube-nocookie.com/embed/?list=PL590L5WQmH8fmto8QIHxA9oU7PLVa3ntk;&autoplay=0&enablejsapi=1&index=0&listType=playlist&loop=1&modestbranding=1"
+        allow="encrypted-media; accelerometer; gyroscope; picture-in-picture"
+        scrolling="no"
+        allowFullScreen>
+      </iframe>
     </div>
   )
 }
