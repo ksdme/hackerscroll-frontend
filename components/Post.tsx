@@ -50,12 +50,20 @@ export default function Post(props: Props) {
       <div>
         <div
           className="
-            w-full max-w-3xl break-words mx-auto prose prose-img:rounded prose-a:text-blue-500 hover:prose-a:text-blue-600
-            tracking-wide md:leading-8 prose-code:font-monospace prose-code:before:hidden prose-code:after:hidden
-            prose-code:bg-black prose-code:text-white prose-code:font-normal prose-code:rounded
+            w-full max-w-3xl py-8 md:py-16 break-words mx-auto prose prose-img:rounded prose-a:text-blue-500
+            hover:prose-a:text-blue-600 tracking-wide md:leading-8 prose-code:font-monospace prose-code:before:hidden
+            prose-code:after:hidden prose-code:bg-black prose-code:text-white prose-code:font-normal prose-code:rounded
             prose-code:px-1 prose-code:mx-1 prose-hr:my-6 md:prose-hr:my-8
           "
         >
+          <h2 className="pb-6 text-left md:text-center">
+            This is a new title. Will check it twice.
+
+            <div className="pt-1 text-base font-normal">
+              This is a subtitle, this is a subtitle.
+            </div>
+          </h2>
+
           <div id="readability-page-1" className="page">
               <i>
                   <b><a href="https://patreon.com/danluu">I'm trying some experimental tiers on Patreon</a></b> to see if I can get to
