@@ -1,7 +1,7 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
 import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import TopBarProgressIndicator from 'react-topbar-progress-indicator'
 import Button from '../components/Button'
 import Layout from '../components/Layout'
@@ -56,50 +56,64 @@ export default function IndexPage() {
         )
       }
 
-      <div className="flex gap-x-4 px-8 md:px-0 pb-8">
-        <Button
-          icon={LightBulbIcon}
-          label="Expand Unread"
-          onClick={() => setExpandAllUnread(true)}
-        />
-
-        <Button
-          icon={ChevronDoubleDownIcon}
-          label="Expand All"
-          onClick={() => setExpandAll(true)}
-        />
-      </div>
-
       {
-        !isLoading && data && (
-          <div className="flex flex-col md:rounded border-y md:border-x border-gray-200 divide-y divide-gray-200">
-            {items?.map((item, index) => {
-              return (
-                <Post
-                  key={item.id}
-                  index={index+1}
-                  post={item}
-                  open={
-                    expandAll
-                    || (expandAllUnread && !getIsRead(item.id))
-                  }
-                  isRead={getIsRead(item.id)}
-                  onToggleRead={() => toggleIsRead(item.id)}
-                />
+        data && (
+          <Fragment>
+            <div className="flex gap-x-4 px-8 md:px-0 pb-8">
+              <Button
+                icon={LightBulbIcon}
+                label="Expand Unread"
+                onClick={() => setExpandAllUnread(true)}
+              />
+
+              <Button
+                icon={ChevronDoubleDownIcon}
+                label="Expand All"
+                onClick={() => setExpandAll(true)}
+              />
+            </div>
+
+            {
+              !isLoading && (
+                <div className="flex flex-col md:rounded border-y md:border-x border-gray-200 divide-y divide-gray-200">
+                  {items?.map((item, index) => {
+                    return (
+                      <Post
+                        key={item.id}
+                        index={index+1}
+                        post={item}
+                        open={
+                          expandAll
+                          || (expandAllUnread && !getIsRead(item.id))
+                        }
+                        isRead={getIsRead(item.id)}
+                        onToggleRead={() => toggleIsRead(item.id)}
+                      />
+                    )
+                  })}
+                </div>
               )
-            })}
-          </div>
+            }
+
+            {
+              hasNextPage && !isLoading && (
+                <div className="flex justify-center py-8">
+                  <Button
+                    icon={ArrowSmDownIcon}
+                    label="Load More Stories"
+                    onClick={fetchNextPage}
+                  />
+                </div>
+              )
+            }
+          </Fragment>
         )
       }
 
       {
-        hasNextPage && !isLoading && (
-          <div className="flex justify-center py-8">
-            <Button
-              icon={ArrowSmDownIcon}
-              label="Load More Stories"
-              onClick={fetchNextPage}
-            />
+        !data && isLoading && (
+          <div className="h-64 flex justify-center items-center">
+            loading
           </div>
         )
       }
