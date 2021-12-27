@@ -68,8 +68,20 @@ export default function Post(props: Props) {
 
       {
         expanded && (
-          <div>
-            <YouTubeVideoContent />
+          <div className="py-8 md:py-16">
+            <ArticleContent />
+
+            <div className="flex justify-center gap-x-4">
+              <Button
+                icon={CheckCircleIcon}
+                label="Mark Read"
+              />
+
+              <Button
+                icon={CheckCircleIcon}
+                label="Mark Read"
+              />
+            </div>
           </div>
         )
       }
@@ -84,7 +96,7 @@ function ArticleContent() {
   return (
     <div
       className="
-        w-full max-w-3xl py-8 md:py-16 break-words mx-auto prose prose-img:rounded prose-a:text-blue-500
+        w-full max-w-3xl break-words mx-auto prose prose-img:rounded prose-a:text-blue-500
         hover:prose-a:text-blue-600 tracking-wide md:leading-8 prose-code:font-monospace prose-code:before:hidden
         prose-code:after:hidden prose-code:bg-black prose-code:text-white prose-code:font-normal prose-code:rounded
         prose-code:px-1 prose-code:mx-1 prose-hr:my-6 md:prose-hr:my-8
