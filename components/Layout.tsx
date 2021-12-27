@@ -8,7 +8,7 @@ export default function Layout(props: Props) {
 
   return (
     <div className="flex flex-col">
-      <nav className="sticky top-0 z-10 drop-shadow backdrop-blur-sm bg-white/60">
+      <nav className="sticky top-0 z-10 drop-shadow-sm backdrop-blur-sm bg-white/60">
         <div className="container py-4 mx-auto">
           <div className="font-medium pl-4 md:pl-0">
             HackerScroll
