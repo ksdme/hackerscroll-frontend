@@ -6,6 +6,7 @@ export default function Button(props: Props) {
     icon: Icon,
     label,
     onClick,
+    disableEventPropagation = false,
   } = props
 
   return (
@@ -14,7 +15,15 @@ export default function Button(props: Props) {
         flex items-center gap-x-2 px-2 py-1 text-gray-500 rounded hover:text-gray-800 hover:bg-gray-100 border
         text-sm md:text-base whitespace-nowrap
       "
-      onClick={onClick}
+      onClick={(event) => {
+        if (disableEventPropagation) {
+          event.stopPropagation()
+        }
+
+        if (onClick) {
+          onClick()
+        }
+      }}
     >
       {
         Icon
@@ -30,4 +39,5 @@ interface Props {
   icon?: React.ComponentType<{ className?: string }>
   label?: string
   onClick?: () => void
+  disableEventPropagation?: boolean
 }
