@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
 import useFeed from '../hooks/useFeed'
+import useReads from '../hooks/useReads'
 
 /*
   Home page.
@@ -26,6 +27,11 @@ export default function IndexPage() {
   }, [
     data,
   ])
+
+  const {
+    get: getIsRead,
+    toggle: toggleIsRead,
+  } = useReads()
 
   return (
     <Layout>
@@ -50,6 +56,8 @@ export default function IndexPage() {
                   key={item.id}
                   index={index+1}
                   post={item}
+                  isRead={getIsRead(item.id)}
+                  onToggleRead={() => toggleIsRead(item.id)}
                 />
               )
             })}

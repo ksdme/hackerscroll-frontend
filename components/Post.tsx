@@ -1,7 +1,9 @@
-import { ArrowsExpandIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from '@heroicons/react/outline'
+import { ChevronUpIcon } from '@heroicons/react/outline'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
-import { MinusCircleIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/outline'
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Post as PostModel } from '../models/Post'
 import { hnItemUrl } from '../utils/urls'
@@ -14,15 +16,45 @@ export default function Post(props: Props) {
   const {
     index,
     post,
+    isRead,
+    onToggleRead,
   } = props
 
+  // Expansion
   const [
     expanded,
     setExpanded,
   ] = useState(false)
 
-  // Toggle the expansion status of the story.
-  const toggleExpansion = () => setExpanded(!expanded)
+  const toggleExpansion = () => {
+    setExpanded(!expanded)
+  }
+
+  // Action button to toggle the read status of the post.
+  const ReadActionButton = ({ autoCollapse }: { autoCollapse: boolean }) => (
+    <Button
+      icon={
+        isRead
+          ? XCircleIcon
+          : CheckCircleIcon
+      }
+      label={
+        isRead
+          ? "Unread"
+          : "Read"
+      }
+      onClick={() => {
+        // In case the post is being set to read and the content is already
+        // expanded, collapse it.
+        if (autoCollapse && !isRead && expanded) {
+          toggleExpansion()
+        }
+
+        onToggleRead()
+      }}
+      disableEventPropagation
+    />
+  )
 
   return (
     <div className="flex flex-col p-4 gap-y-4 divide-y divide-gray-200">
@@ -33,7 +65,11 @@ export default function Post(props: Props) {
           </div>
 
           <div className="flex flex-col">
-            <h3 className="text-base md:text-lg">
+            <h3
+              className={clsx("text-base md:text-lg", {
+                'text-gray-400': isRead,
+              })}
+            >
               {post.title}
             </h3>
 
@@ -47,8 +83,8 @@ export default function Post(props: Props) {
           <Button
             icon={
               expanded
-                ? MinusCircleIcon
-                : ArrowsExpandIcon
+                ? ChevronUpIcon
+                : ChevronDownIcon
             }
             label={
               expanded
@@ -56,16 +92,17 @@ export default function Post(props: Props) {
                 : 'Expand'
             }
             onClick={toggleExpansion}
+            disableEventPropagation
           />
 
-          <Button
-            icon={CheckCircleIcon}
-            label="Read"
+          <ReadActionButton
+            autoCollapse={false}
           />
 
           <Button
             icon={ExternalLinkIcon}
             onClick={() => window.open(hnItemUrl(post.hn_id))}
+            disableEventPropagation
           />
         </div>
       </div>
@@ -84,14 +121,8 @@ export default function Post(props: Props) {
             }
 
             <div className="flex justify-center gap-x-4">
-              <Button
-                icon={CheckCircleIcon}
-                label="Mark Read"
-              />
-
-              <Button
-                icon={CheckCircleIcon}
-                label="Mark Read"
+              <ReadActionButton
+                autoCollapse={true}
               />
             </div>
           </div>
@@ -104,6 +135,8 @@ export default function Post(props: Props) {
 interface Props {
   index?: number
   post: PostModel
+  isRead: boolean
+  onToggleRead: () => void
 }
 
 /*
