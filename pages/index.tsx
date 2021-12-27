@@ -2,6 +2,7 @@ import { ArrowSmDownIcon } from '@heroicons/react/solid'
 import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
 import { useMemo, useState } from 'react'
+import TopBarProgressIndicator from 'react-topbar-progress-indicator'
 import Button from '../components/Button'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
@@ -15,6 +16,7 @@ export default function IndexPage() {
   const {
     data,
     isLoading,
+    isFetching,
     hasNextPage,
     fetchNextPage,
   } = useFeed()
@@ -48,6 +50,12 @@ export default function IndexPage() {
 
   return (
     <Layout>
+      {
+        isFetching && (
+          <TopBarProgressIndicator />
+        )
+      }
+
       <div className="flex gap-x-4 px-8 md:px-0 pb-8">
         <Button
           icon={LightBulbIcon}
@@ -85,7 +93,7 @@ export default function IndexPage() {
       }
 
       {
-        hasNextPage && (
+        hasNextPage && !isLoading && (
           <div className="flex justify-center py-8">
             <Button
               icon={ArrowSmDownIcon}
