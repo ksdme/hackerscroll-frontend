@@ -4,6 +4,7 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { MinusCircleIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import { Post as PostModel } from '../models/Post'
+import { hnItemUrl } from '../utils/urls'
 import Button from './Button'
 
 /*
@@ -64,6 +65,7 @@ export default function Post(props: Props) {
 
           <Button
             icon={ExternalLinkIcon}
+            onClick={() => window.open(hnItemUrl(post.hn_id))}
           />
         </div>
       </div>
