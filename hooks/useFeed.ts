@@ -22,7 +22,9 @@ export default function useFeed(initialPage = 1) {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
     getNextPageParam: (lastPage) => {
-      return lastPage.data.page + 1
+      if (lastPage.data?.items?.length) {
+        return lastPage.data.page + 1
+      }
     },
     getPreviousPageParam: (firstPage) => {
       return firstPage.data.page - 1
