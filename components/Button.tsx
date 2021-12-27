@@ -12,7 +12,7 @@ export default function Button(props: Props) {
     <button
       className="
         flex items-center gap-x-2 px-2 py-1 text-gray-500 rounded hover:text-gray-800 hover:bg-gray-100 border
-        text-sm md:text-base
+        text-sm md:text-base whitespace-nowrap
       "
       onClick={onClick}
     >
