@@ -183,3 +183,13 @@ interface Props {
   isRead: boolean
   onToggleRead: () => void
 }
+
+/*
+  Returns a boolean indicating if the post fits the smart filter.
+*/
+export function isSmart(post: PostModel) {
+  return (
+    isArticleApplicable(post)
+    || isYouTubeApplicable(post)
+  )
+}

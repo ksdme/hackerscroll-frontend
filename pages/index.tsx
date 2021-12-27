@@ -1,13 +1,18 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
 import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
+import { SparklesIcon } from '@heroicons/react/solid'
 import { Fragment, useMemo, useState } from 'react'
 import TopBarProgressIndicator from 'react-topbar-progress-indicator'
+import createPersistedState from 'use-persisted-state'
 import Button from '../components/Button'
 import Layout from '../components/Layout'
-import Post from '../components/Post'
+import Post, { isSmart } from '../components/Post'
 import useFeed from '../hooks/useFeed'
 import useReads from '../hooks/useReads'
+
+// Smart scroll setting needs to be persisted in localStorage.
+const useSmartScrollState = createPersistedState('filter-smart-scroll')
 
 /*
   Home page.
@@ -48,6 +53,11 @@ export default function IndexPage() {
     setExpandAllUnread,
   ] = useState(false)
 
+  const [
+    smartScroll,
+    setSmartScroll,
+  ] = useSmartScrollState(false)
+
   return (
     <Layout>
       {
@@ -71,26 +81,44 @@ export default function IndexPage() {
                 label="Expand All"
                 onClick={() => setExpandAll(true)}
               />
+
+              <Button
+                icon={SparklesIcon}
+                label={
+                  smartScroll
+                    ? "Show Hidden Stories"
+                    : "Enable Smart Scroll"
+                }
+                onClick={() => setSmartScroll(!smartScroll)}
+              />
             </div>
 
             {
               !isLoading && (
                 <div className="flex flex-col md:rounded border-y md:border-x border-gray-200 divide-y divide-gray-200">
-                  {items?.map((item, index) => {
-                    return (
-                      <Post
-                        key={item.id}
-                        index={index+1}
-                        post={item}
-                        open={
-                          expandAll
-                          || (expandAllUnread && !getIsRead(item.id))
-                        }
-                        isRead={getIsRead(item.id)}
-                        onToggleRead={() => toggleIsRead(item.id)}
-                      />
-                    )
-                  })}
+                  {
+                    items
+                      ?.filter((item) => {
+                        return smartScroll
+                          ? isSmart(item)
+                          : true
+                      })
+                      ?.map((item, index) => {
+                        return (
+                          <Post
+                            key={item.id}
+                            index={index+1}
+                            post={item}
+                            open={
+                              expandAll
+                              || (expandAllUnread && !getIsRead(item.id))
+                            }
+                            isRead={getIsRead(item.id)}
+                            onToggleRead={() => toggleIsRead(item.id)}
+                          />
+                        )
+                      })
+                  }
                 </div>
               )
             }
