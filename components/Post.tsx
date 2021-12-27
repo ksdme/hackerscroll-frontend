@@ -2,7 +2,7 @@ import { CheckCircleIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { ChevronUpIcon } from '@heroicons/react/outline'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
-import { XCircleIcon } from '@heroicons/react/outline'
+import { EyeOffIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Post as PostModel } from '../models/Post'
@@ -43,7 +43,7 @@ export default function Post(props: Props) {
     <Button
       icon={
         isRead
-          ? XCircleIcon
+          ? EyeOffIcon
           : CheckCircleIcon
       }
       label={
