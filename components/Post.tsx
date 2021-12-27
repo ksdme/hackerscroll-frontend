@@ -8,8 +8,10 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Post as PostModel } from '../models/Post'
 import { hnItemUrl } from '../utils/urls'
-import ArticleContent from './ArticleContent'
+import ArticleContent, { isApplicable as isArticleApplicable } from './ArticleContent'
 import Button from './Button'
+import DefaultContent from './DefaultContent'
+import YouTubeVideoContent, { isApplicable as isYouTubeApplicable } from './YouTubeContent'
 
 /*
   Post Component.
@@ -143,15 +145,11 @@ export default function Post(props: Props) {
 
       {
         expanded && (
-          <div className="py-8 md:py-16">
+          <div className="flex flex-col gap-y-8 py-8">
             {
-              // TODO: Check if YouTube link
-              // TODO: Check if no content, just show the link
-              post?.Content && (
-                <ArticleContent
-                  post={post}
-                />
-              )
+              (isArticleApplicable(post) && <ArticleContent post={post} />)
+              || (isYouTubeApplicable(post) && <YouTubeVideoContent post={post} />)
+              || (<DefaultContent post={post} />)
             }
 
             <div className="flex justify-center gap-x-4">
