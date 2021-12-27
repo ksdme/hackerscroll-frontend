@@ -4,7 +4,7 @@ import { ChevronUpIcon } from '@heroicons/react/outline'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Post as PostModel } from '../models/Post'
 import { hnItemUrl } from '../utils/urls'
 import Button from './Button'
@@ -16,6 +16,7 @@ export default function Post(props: Props) {
   const {
     index,
     post,
+    open = false,
     isRead,
     onToggleRead,
   } = props
@@ -24,11 +25,18 @@ export default function Post(props: Props) {
   const [
     expanded,
     setExpanded,
-  ] = useState(false)
+  ] = useState(open)
 
   const toggleExpansion = () => {
     setExpanded(!expanded)
   }
+
+  // Wire up the open prop to expansion.
+  useEffect(() => {
+    setExpanded(open)
+  }, [
+    open,
+  ])
 
   // Action button to toggle the read status of the post.
   const ReadActionButton = ({ autoCollapse }: { autoCollapse: boolean }) => (
@@ -135,6 +143,7 @@ export default function Post(props: Props) {
 interface Props {
   index?: number
   post: PostModel
+  open?: boolean
   isRead: boolean
   onToggleRead: () => void
 }

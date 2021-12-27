@@ -1,6 +1,7 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
+import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import Button from '../components/Button'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
@@ -33,17 +34,31 @@ export default function IndexPage() {
     toggle: toggleIsRead,
   } = useReads()
 
+  // TODO: Use a context or subscription based system to manage this, so it
+  // can support use cases like Collapse All.
+  const [
+    expandAll,
+    setExpandAll,
+  ] = useState(false)
+
+  const [
+    expandAllUnread,
+    setExpandAllUnread,
+  ] = useState(false)
+
   return (
     <Layout>
       <div className="flex gap-x-4 px-8 md:px-0 pb-8">
         <Button
           icon={LightBulbIcon}
-          label="Expand All"
+          label="Expand Unread"
+          onClick={() => setExpandAllUnread(true)}
         />
 
         <Button
-          icon={LightBulbIcon}
-          label="Expand Unread"
+          icon={ChevronDoubleDownIcon}
+          label="Expand All"
+          onClick={() => setExpandAll(true)}
         />
       </div>
 
@@ -56,6 +71,10 @@ export default function IndexPage() {
                   key={item.id}
                   index={index+1}
                   post={item}
+                  open={
+                    expandAll
+                    || (expandAllUnread && !getIsRead(item.id))
+                  }
                   isRead={getIsRead(item.id)}
                   onToggleRead={() => toggleIsRead(item.id)}
                 />
