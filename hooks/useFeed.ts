@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useInfiniteQuery } from 'react-query'
-import environment from '../environments/local'
 import { Post } from '../models/Post'
 
 /*
@@ -8,7 +7,7 @@ import { Post } from '../models/Post'
 */
 export default function useFeed(initialPage = 1) {
   const fetcher = ({ pageParam = initialPage }) => {
-    return axios.get<FeedResponse>(environment.API_SERVER + '/api/top', {
+    return axios.get<FeedResponse>(process.env.API_SERVER + '/api/top', {
       params: {
         page: pageParam,
       },
