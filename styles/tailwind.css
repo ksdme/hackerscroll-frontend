@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .font-sans {
     font-family: 'IBM Plex Sans', sans-serif;
   }

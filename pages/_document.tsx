@@ -23,7 +23,7 @@ export default class AppDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital@0;1&display=swap" rel="stylesheet" />
         </Head>
 
-        <body className="font-sans">
+        <body className="font-sans no-tap-highlight">
           <Main />
           <NextScript />
         </body>
