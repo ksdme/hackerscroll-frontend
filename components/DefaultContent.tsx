@@ -23,7 +23,7 @@ export default function DefaultContent(props: Props) {
       className="w-full h-44 flex justify-center items-center"
       onClick={() => window.open(post.url ?? hnItemUrl(post.hn_id))}
     >
-      {url.host}<span className="text-gray-400">{url.pathname}</span>
+      {url.host}
     </button>
   )
 }
