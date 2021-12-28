@@ -7,7 +7,7 @@ import { Post } from '../models/Post'
 */
 export default function useFeed(initialPage = 1) {
   const fetcher = ({ pageParam = initialPage }) => {
-    return axios.get<FeedResponse>(process.env.API_SERVER + '/api/top', {
+    return axios.get<FeedResponse>(process.env.API_SERVER + '/top', {
       params: {
         page: pageParam,
       },
