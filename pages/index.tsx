@@ -2,6 +2,7 @@ import { ArrowSmDownIcon } from '@heroicons/react/solid'
 import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
 import { SparklesIcon } from '@heroicons/react/solid'
+import Head from 'next/head'
 import { Fragment, useMemo, useState } from 'react'
 import TopBarProgressIndicator from 'react-topbar-progress-indicator'
 import createPersistedState from 'use-persisted-state'
@@ -10,6 +11,7 @@ import Layout from '../components/Layout'
 import Post, { isSmart } from '../components/Post'
 import useFeed from '../hooks/useFeed'
 import useReads from '../hooks/useReads'
+import favicon from '../public/favicon.ico'
 
 // Smart scroll setting needs to be persisted in localStorage.
 const useSmartScrollState = createPersistedState('filter-smart-scroll')
@@ -60,6 +62,11 @@ export default function IndexPage() {
 
   return (
     <Layout>
+      <Head>
+        <title>HackerScroll</title>
+        <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
+      </Head>
+
       {
         isFetching && (
           <TopBarProgressIndicator />
