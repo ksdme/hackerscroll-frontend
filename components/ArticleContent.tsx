@@ -8,13 +8,21 @@ export default function ArticleContent(props: ArticleContentProps) {
     post,
   } = props
 
+  // Some complex prose related styling is broken out to the global tailwind
+  // css file.
   return (
     <div
       className="
-        w-full max-w-3xl md:pt-8 break-words mx-auto prose prose-img:rounded prose-a:text-blue-500
-        hover:prose-a:text-blue-600 tracking-wide md:leading-8 prose-code:font-monospace prose-code:before:hidden
-        prose-code:after:hidden prose-code:bg-gray-50 prose-code:text-black prose-code:font-normal prose-code:rounded
-        prose-code:border prose-code:px-1 prose-code:mx-1 prose-hr:my-6 md:prose-hr:my-8 prose-img:mx-auto
+        w-full max-w-3xl md:pt-8 break-words mx-auto tracking-wide md:leading-8
+        prose
+        prose-img:rounded
+        prose-a:text-blue-500 hover:prose-a:text-blue-600
+        prose-code:font-monospace prose-code:before:hidden prose-code:after:hidden
+        prose-code:bg-gray-50 prose-code:text-black prose-code:font-normal prose-code:rounded
+        prose-code:border prose-code:px-1 prose-code:mx-1
+        prose-hr:my-6 md:prose-hr:my-8
+        prose-table:block prose-table:overflow-x-scroll
+        prose-img:mx-auto
       "
     >
       <h2 className="pb-6 text-left md:text-center">

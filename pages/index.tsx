@@ -76,7 +76,7 @@ export default function IndexPage() {
       {
         data && (
           <Fragment>
-            <div className="flex gap-x-4 px-8 md:px-0 pb-8">
+            <div className="flex gap-x-4 px-8 md:px-0 pb-8 overflow-x-scroll">
               <Button
                 icon={LightBulbIcon}
                 label="Expand Unread"

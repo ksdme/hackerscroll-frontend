@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /*
+    prose-img does not apply to SVG elements. 
+  */
+  .prose svg {
+    max-width: 100%;
+  }
+
+  /*
+    Revert the style of code block in case it's not inline.
+  */
+  .prose pre code {
+    @apply border-0 p-0 m-0 bg-transparent text-white;
+  }
+}
+
 @layer utilities {
   .no-tap-highlight {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
