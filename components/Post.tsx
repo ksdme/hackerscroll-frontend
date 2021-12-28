@@ -154,7 +154,7 @@ export default function Post(props: Props) {
 
             <div className="flex justify-center gap-x-4">
               <ReadActionButton
-                autoCollapse={true}
+                autoCollapse={false}
               />
 
               {
