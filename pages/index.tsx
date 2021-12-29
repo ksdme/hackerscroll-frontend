@@ -1,5 +1,4 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
-import { ChevronDoubleDownIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
 import { SparklesIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
@@ -45,11 +44,6 @@ export default function IndexPage() {
 
   // TODO: Use a context or subscription based system to manage this, so it
   // can support use cases like Collapse All.
-  const [
-    expandAll,
-    setExpandAll,
-  ] = useState(false)
-
   const [
     expandAllUnread,
     setExpandAllUnread,
@@ -110,10 +104,7 @@ export default function IndexPage() {
                             key={item.id}
                             index={index+1}
                             post={item}
-                            open={
-                              expandAll
-                              || (expandAllUnread && !getIsRead(item.id))
-                            }
+                            open={expandAllUnread && !getIsRead(item.id)}
                             isRead={getIsRead(item.id)}
                             onToggleRead={() => toggleIsRead(item.id)}
                           />
