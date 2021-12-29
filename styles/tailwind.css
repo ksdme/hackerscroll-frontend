@@ -16,6 +16,13 @@
   .prose pre code {
     @apply border-0 p-0 m-0 bg-transparent text-white;
   }
+
+  /*
+    Limit iframe max-width to 100%.
+  */
+  .prose iframe {
+    @apply max-w-full;
+  }
 }
 
 @layer utilities {

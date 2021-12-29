@@ -84,12 +84,6 @@ export default function IndexPage() {
               />
 
               <Button
-                icon={ChevronDoubleDownIcon}
-                label="Expand All"
-                onClick={() => setExpandAll(true)}
-              />
-
-              <Button
                 icon={SparklesIcon}
                 label={
                   smartScroll
