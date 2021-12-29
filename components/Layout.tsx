@@ -17,7 +17,11 @@ export default function Layout(props: Props) {
               HackerScroll
             </div>
 
-            <a className="hidden md:block" href="https://github.com/ksdme/hackerscroll-frontend" target="_blank">
+            <a
+              className="text-gray-400 md:text-gray-800"
+              href="https://github.com/ksdme/hackerscroll-frontend"
+              target="_blank"
+            >
               GitHub
             </a>
           </div>
@@ -28,14 +32,6 @@ export default function Layout(props: Props) {
         <main className="container mx-auto py-8">
           {children}
         </main>
-      </div>
-
-      <div className="hidden md:block">
-        <div className="container flex justify-center md:justify-end mx-auto pb-16">
-          <a href="https://twitter.com/ksdme" target="_blank">
-            a <span className="text-blue-600">@ksdme</span> product
-          </a>
-        </div>
       </div>
     </Fragment>
   )
