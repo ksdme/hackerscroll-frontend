@@ -89,7 +89,10 @@ export default function Post(props: Props) {
   return (
     <div>
       <div className="flex flex-col p-4 gap-y-4 divide-y divide-gray-200">
-        <div className="flex justify-between items-center flex-wrap gap-y-4 cursor-pointer" onClick={toggleExpansion}>
+        <div
+          className="flex justify-between items-center flex-wrap md:flex-nowrap gap-y-4 cursor-pointer"
+          onClick={toggleExpansion}
+        >
           <div className="flex gap-x-2">
             <div className="text-gray-400 text-base md:text-lg">
               {index}.
@@ -145,6 +148,7 @@ export default function Post(props: Props) {
         </div>
 
         {
+          // TODO: Animate the content expansion.
           expanded && (
             <div className="flex flex-col gap-y-8 py-8">
               {
