@@ -17,6 +17,8 @@ const useSmartScrollState = createPersistedState('filter-smart-scroll')
 
 /*
   Home page.
+
+  TODO: Add getInitialProps.
 */
 export default function IndexPage() {
   const {
