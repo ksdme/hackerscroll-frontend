@@ -5,7 +5,6 @@ import { ChevronUpIcon } from '@heroicons/react/outline'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { EyeOffIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Post as PostModel } from '../models/Post'
 import { hnItemUrl } from '../utils/urls'
@@ -145,57 +144,35 @@ export default function Post(props: Props) {
           </div>
         </div>
 
-        <AnimatePresence>
-          {
-            expanded && (
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: -5,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -5,
-                }}
-                transition={{
-                  ease: 'linear',
-                  duration: 0.125,
-                }}
-                key={post.id}
-              >
-                <div className="flex flex-col gap-y-8 py-8">
-                  {
-                    (isArticleApplicable(post) && <ArticleContent post={post} />)
-                    || (isYouTubeApplicable(post) && <YouTubeVideoContent post={post} />)
-                    || (<DefaultContent post={post} />)
-                  }
+        {
+          expanded && (
+            <div className="flex flex-col gap-y-8 py-8">
+              {
+                (isArticleApplicable(post) && <ArticleContent post={post} />)
+                || (isYouTubeApplicable(post) && <YouTubeVideoContent post={post} />)
+                || (<DefaultContent post={post} />)
+              }
 
-                  <div className="flex justify-center gap-x-4">
-                    <ReadActionButton
-                      autoCollapse={false}
-                    />
+              <div className="flex justify-center gap-x-4">
+                <ReadActionButton
+                  autoCollapse={false}
+                />
 
-                    {
-                      post.url && (
-                        <OpenLinkAction />
-                      )
-                    }
+                {
+                  post.url && (
+                    <OpenLinkAction />
+                  )
+                }
 
-                    {
-                      post.url && (
-                        <OpenThreadAction />
-                      )
-                    }
-                  </div>
-                </div>
-              </motion.div>
-            )
-          }
-        </AnimatePresence>
+                {
+                  post.url && (
+                    <OpenThreadAction />
+                  )
+                }
+              </div>
+            </div>
+          )
+        }
       </div>
 
       {
