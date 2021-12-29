@@ -25,7 +25,7 @@ export default function ArticleContent(props: ArticleContentProps) {
         prose-img:mx-auto
       "
     >
-      <h2 className="pb-6 text-left md:text-center">
+      <h2 className="pb-6 text-center">
         {post.Content?.title}
 
         {
