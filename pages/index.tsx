@@ -54,7 +54,7 @@ export default function IndexPage() {
   const [
     smartScroll,
     setSmartScroll,
-  ] = useSmartScrollState(false)
+  ] = useSmartScrollState(true)
 
   return (
     <Layout>
