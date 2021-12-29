@@ -5,7 +5,8 @@ import { ChevronUpIcon } from '@heroicons/react/outline'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { EyeOffIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import useAnimatedCollapse from '../hooks/useAnimatedCollapse'
 import { Post as PostModel } from '../models/Post'
 import { hnItemUrl } from '../utils/urls'
 import ArticleContent, { isApplicable as isArticleApplicable } from './ArticleContent'
@@ -41,6 +42,12 @@ export default function Post(props: Props) {
   }, [
     open,
   ])
+
+  // Control the collapse.
+  const {
+    render,
+    getCollapseProps,
+  } = useAnimatedCollapse(!expanded)
 
   // Action button to toggle the read status of the post.
   const ReadActionButton = ({ autoCollapse }: { autoCollapse: boolean }) => (
@@ -87,101 +94,102 @@ export default function Post(props: Props) {
   )
 
   return (
-    <div>
-      <div className="flex flex-col p-4 gap-y-4 divide-y divide-gray-200">
-        <div
-          className="flex justify-between items-center flex-wrap md:flex-nowrap gap-y-4 cursor-pointer"
-          onClick={toggleExpansion}
-        >
-          <div className="flex gap-x-2">
-            <div className="text-gray-400 text-base md:text-lg">
-              {index}.
-            </div>
-
-            <div className="flex flex-col">
-              <h3
-                className={clsx("text-base md:text-lg", {
-                  'text-gray-400': isRead,
-                })}
-              >
-                {post.title}
-              </h3>
-
-              <h4 className="pt-1 md:pt-0 text-sm text-gray-400">
-                by {post.by}
-              </h4>
-            </div>
+    <div className="flex flex-col">
+      <div
+        className="flex p-4 justify-between items-center flex-wrap md:flex-nowrap gap-y-4 cursor-pointer"
+        onClick={toggleExpansion}
+      >
+        <div className="flex gap-x-2">
+          <div className="text-gray-400 text-base md:text-lg">
+            {index}.
           </div>
 
-          <div className="w-full md:w-auto flex justify-center gap-x-4">
-            <Button
-              icon={
-                expanded
-                  ? ChevronUpIcon
-                  : ChevronDownIcon
-              }
-              label={
-                expanded
-                  ? 'Collapse'
-                  : 'Expand'
-              }
-              onClick={toggleExpansion}
-              disableEventPropagation
-            />
+          <div className="flex flex-col">
+            <h3
+              className={clsx("text-base md:text-lg", {
+                'text-gray-400': isRead,
+              })}
+            >
+              {post.title}
+            </h3>
 
-            <ReadActionButton
-              autoCollapse={false}
-            />
-
-            {
-              post.url && (
-                <OpenLinkAction />
-              )
-            }
-
-            {
-              post.url && (
-                <OpenThreadAction />
-              )
-            }
+            <h4 className="pt-1 md:pt-0 text-sm text-gray-400">
+              by {post.by}
+            </h4>
           </div>
         </div>
 
-        {
-          // TODO: Animate the content expansion.
-          expanded && (
-            <div className="flex flex-col gap-y-8 py-8">
-              {
-                (isArticleApplicable(post) && <ArticleContent post={post} />)
-                || (isYouTubeApplicable(post) && <YouTubeVideoContent post={post} />)
-                || (<DefaultContent post={post} />)
-              }
+        <div className="w-full md:w-auto flex justify-center gap-x-4">
+          <Button
+            icon={
+              expanded
+                ? ChevronUpIcon
+                : ChevronDownIcon
+            }
+            label={
+              expanded
+                ? 'Collapse'
+                : 'Expand'
+            }
+            onClick={toggleExpansion}
+            disableEventPropagation
+          />
 
-              <div className="flex justify-center gap-x-4">
-                <ReadActionButton
-                  autoCollapse={false}
-                />
+          <ReadActionButton
+            autoCollapse={false}
+          />
 
-                {
-                  post.url && (
-                    <OpenLinkAction />
-                  )
-                }
+          {
+            post.url && (
+              <OpenLinkAction />
+            )
+          }
 
-                {
-                  post.url && (
-                    <OpenThreadAction />
-                  )
-                }
-              </div>
-            </div>
-          )
-        }
+          {
+            post.url && (
+              <OpenThreadAction />
+            )
+          }
+        </div>
       </div>
 
       {
-        expanded && (
-          <div className="w-full h-0.5 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500" />
+        render && (
+          <div {...getCollapseProps()}>
+            {/* Section divider. */}
+            <div className="mx-4 md:mx-6 border-b" />
+
+            <div className="px-4">
+              <div className="flex flex-col gap-y-8 py-8">
+                {
+                  (isArticleApplicable(post) && <ArticleContent post={post} />)
+                  || (isYouTubeApplicable(post) && <YouTubeVideoContent post={post} />)
+                  || (<DefaultContent post={post} />)
+                }
+
+                <div className="flex justify-center gap-x-4">
+                  <ReadActionButton
+                    autoCollapse={false}
+                  />
+
+                  {
+                    post.url && (
+                      <OpenLinkAction />
+                    )
+                  }
+
+                  {
+                    post.url && (
+                      <OpenThreadAction />
+                    )
+                  }
+                </div>
+              </div>
+            </div>
+
+            {/* Indicator of the end of content. */}
+            <div className="w-full h-0.5 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500" />
+          </div>
         )
       }
     </div>
