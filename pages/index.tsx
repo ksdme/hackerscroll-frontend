@@ -78,12 +78,6 @@ export default function IndexPage() {
           <Fragment>
             <div className="flex gap-x-4 px-8 md:px-0 pb-8 overflow-x-scroll scrollbar-hide">
               <Button
-                icon={LightBulbIcon}
-                label="Expand Unread"
-                onClick={() => setExpandAllUnread(true)}
-              />
-
-              <Button
                 icon={SparklesIcon}
                 label={
                   smartScroll
@@ -91,6 +85,12 @@ export default function IndexPage() {
                     : "Enable Smart Scroll"
                 }
                 onClick={() => setSmartScroll(!smartScroll)}
+              />
+
+              <Button
+                icon={LightBulbIcon}
+                label="Expand Unread"
+                onClick={() => setExpandAllUnread(true)}
               />
             </div>
 
