@@ -70,7 +70,7 @@ export default function IndexPage() {
   const {
     get: getReadInThisSession,
     set: setReadInThisSession,
-  } = useObjectStore<boolean>()
+  } = useObjectStore<number, boolean>()
 
   return (
     <Layout>
