@@ -67,9 +67,11 @@ export default function IndexPage() {
   ] = useHideRead(false)
 
   // Track the stories whose read status was changed in this session.
+  // Session is loosely defined as is reset when some settings are changed.
   const {
     get: getReadInThisSession,
     set: setReadInThisSession,
+    reset: resetReadInThisSessionStore,
   } = useObjectStore<number, boolean>()
 
   return (
@@ -96,7 +98,10 @@ export default function IndexPage() {
                     ? "Show Read Stories"
                     : "Hide Read Stories"
                 }
-                onClick={() => setHideReadStories(!hideReadStories)}
+                onClick={() => {
+                  resetReadInThisSessionStore()
+                  setHideReadStories(!hideReadStories)
+                }}
               />
 
               <Button

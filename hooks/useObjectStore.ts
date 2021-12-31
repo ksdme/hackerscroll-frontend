@@ -10,5 +10,6 @@ export default function useObjectStore<K extends string | number, V>() {
   return {
     get: (key: string | number) => store.current[key],
     set: (key: string | number, value: V) => store.current[key] = value,
+    reset: () => store.current = {} as Record<K, V>,
   }
 }
