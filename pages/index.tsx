@@ -1,4 +1,5 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
+import { BookmarkIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
 import { SparklesIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
@@ -9,11 +10,15 @@ import Button from '../components/Button'
 import Layout from '../components/Layout'
 import Post, { isSmart } from '../components/Post'
 import useFeed from '../hooks/useFeed'
+import useObjectStore from '../hooks/useObjectStore'
 import useReads from '../hooks/useReads'
 import favicon from '../public/favicon.ico'
 
 // Smart scroll setting needs to be persisted in localStorage.
 const useSmartScrollState = createPersistedState('filter-smart-scroll')
+
+// Setting to hide the posts that are read.
+const useHideRead = createPersistedState('filter-hide-read')
 
 /*
   Home page.
@@ -56,6 +61,17 @@ export default function IndexPage() {
     setSmartScroll,
   ] = useSmartScrollState(true)
 
+  const [
+    hideReadStories,
+    setHideReadStories,
+  ] = useHideRead(false)
+
+  // Track the stories whose read status was changed in this session.
+  const {
+    get: getReadInThisSession,
+    set: setReadInThisSession,
+  } = useObjectStore<boolean>()
+
   return (
     <Layout>
       <Head>
@@ -73,6 +89,16 @@ export default function IndexPage() {
         data && (
           <Fragment>
             <div className="flex gap-x-4 px-8 md:px-0 pb-8 overflow-x-scroll scrollbar-hide">
+              <Button
+                icon={BookmarkIcon}
+                label={
+                  hideReadStories
+                    ? "Show Read Stories"
+                    : "Hide Read Stories"
+                }
+                onClick={() => setHideReadStories(!hideReadStories)}
+              />
+
               <Button
                 icon={SparklesIcon}
                 label={
@@ -96,9 +122,19 @@ export default function IndexPage() {
                   {
                     items
                       ?.filter((item) => {
-                        return smartScroll
-                          ? isSmart(item)
-                          : true
+                        if (smartScroll && !isSmart(item)) {
+                          return false
+                        }
+
+                        if (hideReadStories
+                            // If the post was just marked read, don't hide it until the
+                            // next session because that would cause a scroll jump.
+                            && !getReadInThisSession(item.id)
+                            && getIsRead(item.id)) {
+                          return false
+                        }
+
+                        return true
                       })
                       ?.map((item, index) => {
                         return (
@@ -108,7 +144,15 @@ export default function IndexPage() {
                             post={item}
                             open={expandAllUnread && !getIsRead(item.id)}
                             isRead={getIsRead(item.id)}
-                            onToggleRead={() => toggleIsRead(item.id)}
+                            onToggleRead={(read) => {
+                              // Write to the activity store about the read state.
+                              setReadInThisSession(item.id, read)
+
+                              // Toggle the read state.
+                              // TODO: This always triggers a render, ideally, it should only
+                              // happen when show all is disabled.
+                              toggleIsRead(item.id)
+                            }}
                           />
                         )
                       })

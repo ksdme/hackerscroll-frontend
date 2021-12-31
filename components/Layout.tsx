@@ -11,7 +11,7 @@ export default function Layout(props: Props) {
   return (
     <Fragment>
       <div className="min-h-screen flex flex-col">
-        <nav className="sticky top-0 z-10 drop-shadow-sm backdrop-blur-sm bg-white/80">
+        <nav className="bg-white">
           <div className="container flex justify-between py-4 px-4 md:px-0 mx-auto">
             <div className="font-medium md:pl-0">
               HackerScroll

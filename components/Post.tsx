@@ -69,7 +69,7 @@ export default function Post(props: Props) {
           toggleExpansion()
         }
 
-        onToggleRead()
+        onToggleRead(!isRead)
       }}
       disableEventPropagation
     />
@@ -201,7 +201,7 @@ interface Props {
   post: PostModel
   open?: boolean
   isRead: boolean
-  onToggleRead: () => void
+  onToggleRead: (read: boolean) => void
 }
 
 /*
