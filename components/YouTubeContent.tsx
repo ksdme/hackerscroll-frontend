@@ -51,6 +51,7 @@ export function isApplicable(post: PostModel) {
   Returns the YouTube Video ID from the URL or null.
 */
 function extractVideoID(url: string) {
+  // TODO: Memoize this.
   const link = parse(url, true)
 
   if (link.host.endsWith('youtube.com') && link.pathname.startsWith('/watch')) {
