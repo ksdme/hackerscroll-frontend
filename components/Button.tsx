@@ -12,8 +12,8 @@ export default function Button(props: Props) {
   return (
     <button
       className="
-        flex items-center gap-x-2 px-2 py-1 text-gray-500 rounded hover:text-gray-800 hover:bg-gray-100 border
-        text-sm md:text-base whitespace-nowrap
+        flex items-center gap-x-2 px-2 py-1 text-gray-500 hover:text-gray-800 hover:bg-gray-100
+        border rounded text-sm md:text-base whitespace-nowrap bg-white
       "
       onClick={(event) => {
         if (disableEventPropagation) {
