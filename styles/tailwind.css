@@ -38,4 +38,15 @@
   .font-monospace {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  .animate-fade-out {
+    /* TODO: Use variable for animation. */
+    animation: fade-out 80ms linear 1 forwards;
+  }
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0; }
 }
