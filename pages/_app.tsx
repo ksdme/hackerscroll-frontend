@@ -1,4 +1,5 @@
 import '../styles/tailwind.css'
+import '../styles/global.css'
 import { AppProps } from 'next/app'
 import { GoogleAnalytics, usePagesViews } from 'nextjs-google-analytics'
 import React from 'react'
