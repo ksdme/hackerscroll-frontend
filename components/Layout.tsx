@@ -1,5 +1,6 @@
 import Script from 'next/script'
 import { Fragment } from 'react'
+import GithubStar from '../components/GithubStar'
 
 /*
   Layout shell component for a page.
@@ -18,16 +19,7 @@ export default function Layout(props: Props) {
               HackerScroll
             </div>
 
-            <div className="github-button-wrapper">
-              <a
-                aria-label="Star ksdme/hackerscroll-frontend on GitHub"
-                href="https://github.com/ksdme/hackerscroll-frontend"
-                data-show-count="true"
-                className="github-button"
-              >
-                GitHub
-              </a>
-            </div>
+            <GithubStar />
           </div>
 
           <div className="w-full h-0.5 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500" />
