@@ -145,25 +145,26 @@ export default function Post(props: Props) {
   )
 
   return (
-    <div ref={ref} className="flex flex-col">
+    <div ref={ref} className="flex flex-col dark:bg-zinc-900">
       <div
         className={clsx(
           'md:sticky top-0 z-10',
           'flex p-4 justify-between items-center flex-wrap',
-          'md:flex-nowrap gap-y-4 backdrop-blur-sm bg-white/80 cursor-pointer', {
-          'md:border-b': renderState,
+          'md:flex-nowrap gap-y-4 backdrop-blur-sm cursor-pointer',
+          'bg-white/80 dark:bg-zinc-800/80', {
+          'md:border-b dark:border-zinc-700': renderState,
         })}
         onClick={toggleExpansion}
       >
         <div className="flex gap-x-2">
-          <div className="text-gray-400 text-base md:text-lg">
+          <div className="text-gray-400 dark:text-gray-500 text-base md:text-lg">
             {index}.
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col dark:text-white">
             <h3
               className={clsx("text-base md:text-lg", {
-                'text-gray-400': isRead,
+                'text-gray-400 dark:text-gray-500': isRead,
               })}
             >
               {post.title}
@@ -188,7 +189,10 @@ export default function Post(props: Props) {
         renderState && (
           <React.Fragment>
             {/* Show the sticky post action button panel on mobiles */}
-            <div className="md:hidden sticky top-0 z-10 backdrop-blur-sm bg-white/80 border-b py-4">
+            <div className="
+              md:hidden sticky top-0 z-10 backdrop-blur-sm bg-white/80 py-4
+              border-b dark:border-zinc-700
+            ">
               <ActionButtonPanel />
             </div>
 

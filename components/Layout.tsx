@@ -1,5 +1,5 @@
 import Script from 'next/script'
-import { Fragment } from 'react'
+import React from 'react'
 import GithubStar from '../components/GithubStar'
 
 /*
@@ -11,11 +11,11 @@ export default function Layout(props: Props) {
   } = props
 
   return (
-    <Fragment>
-      <div className="min-h-screen flex flex-col">
-        <nav className="bg-white">
-          <div className="container flex justify-between items-center py-4 px-4 md:px-0 mx-auto">
-            <div className="font-medium md:pl-0">
+    <React.Fragment>
+      <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-900">
+        <nav>
+          <div className="container flex justify-between items-center py-6 px-4 md:px-0 mx-auto">
+            <div className="font-medium md:pl-0 dark:text-white">
               HackerScroll
             </div>
 
@@ -34,7 +34,7 @@ export default function Layout(props: Props) {
         src="https://buttons.github.io/buttons.js"
         strategy="afterInteractive"
       />
-    </Fragment>
+    </React.Fragment>
   )
 }
 

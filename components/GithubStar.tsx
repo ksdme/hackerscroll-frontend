@@ -10,13 +10,22 @@ export default function GithubStar() {
 
   return (
     <a
-      className="flex text-sm rounded border border-gray-300 bg-white"
+      className="
+        flex text-sm rounded
+        dark:text-white
+        bg-white dark:bg-zinc-900
+        border border-gray-300 dark:border-gray-700
+      "
       href="https://github.com/ksdme/hackerscroll-frontend"
       target="_blank"
     >
       {
         (stars || stars === 0) && (
-          <div className="bg-gray-50 px-2 py-1 rounded-l border-r border-gray-300">
+          <div className="
+            px-2 py-1 rounded-l
+            bg-gray-50 dark:bg-zinc-800
+            border-r border-gray-300 dark:border-zinc-700
+          ">
             {stars}
           </div>
         )

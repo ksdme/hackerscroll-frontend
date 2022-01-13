@@ -1,8 +1,11 @@
 import { ArrowSmDownIcon } from '@heroicons/react/solid'
 import { BookmarkIcon } from '@heroicons/react/solid'
 import { LightBulbIcon } from '@heroicons/react/solid'
+import { MoonIcon } from '@heroicons/react/solid'
 import { SparklesIcon } from '@heroicons/react/solid'
+import { SunIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
+import { useTheme } from 'next-themes'
 import { Fragment, useMemo, useState } from 'react'
 import TopBarProgressIndicator from 'react-topbar-progress-indicator'
 import createPersistedState from 'use-persisted-state'
@@ -66,6 +69,14 @@ export default function IndexPage() {
     setHideReadStories,
   ] = useHideRead(false)
 
+  // Theme
+  const {
+    resolvedTheme,
+    setTheme,
+  } = useTheme()
+
+  const isDarkTheme = resolvedTheme === 'dark'
+
   // Track the stories whose read status was changed in this session.
   // Session is loosely defined as is reset when some settings are changed.
   const {
@@ -91,6 +102,24 @@ export default function IndexPage() {
         data && (
           <Fragment>
             <div className="flex gap-x-4 px-8 md:px-0 pb-8 overflow-x-scroll scrollbar-hide">
+              <Button
+                icon={
+                  isDarkTheme
+                    ? SunIcon
+                    : MoonIcon
+                }
+                label={
+                  isDarkTheme
+                    ? "Light Theme"
+                    : "Dark Theme"
+                }
+                onClick={() => setTheme(
+                  isDarkTheme
+                    ? 'light'
+                    : 'dark'
+                )}
+              />
+
               <Button
                 icon={BookmarkIcon}
                 label={
@@ -123,7 +152,11 @@ export default function IndexPage() {
 
             {
               !isLoading && (
-                <div className="flex flex-col md:rounded border-y md:border-x border-gray-200 divide-y divide-gray-200">
+                <div className="
+                  flex flex-col md:rounded
+                  border-y md:border-x border-gray-200 dark:border-zinc-700
+                  divide-y divide-gray-200 dark:divide-zinc-700
+                ">
                   {
                     items
                       ?.filter((item) => {
@@ -183,7 +216,7 @@ export default function IndexPage() {
 
       {
         !data && isLoading && (
-          <div className="h-64 flex justify-center items-center">
+          <div className="h-64 flex justify-center items-center dark:text-white">
             loading
           </div>
         )

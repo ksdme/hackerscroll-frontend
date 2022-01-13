@@ -14,7 +14,7 @@ export default function ArticleContent(props: ArticleContentProps) {
     <div
       className="
         w-full max-w-3xl md:pt-8 break-words mx-auto tracking-wide md:leading-8
-        prose
+        prose dark:prose-invert
         prose-img:rounded
         prose-a:text-blue-500 hover:prose-a:text-blue-600
         prose-code:font-monospace prose-code:before:hidden prose-code:after:hidden
