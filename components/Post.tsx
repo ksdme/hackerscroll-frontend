@@ -190,7 +190,8 @@ export default function Post(props: Props) {
           <React.Fragment>
             {/* Show the sticky post action button panel on mobiles */}
             <div className="
-              md:hidden sticky top-0 z-10 backdrop-blur-sm bg-white/80 py-4
+              md:hidden sticky top-0 z-10 backdrop-blur-sm py-4
+              bg-white/80 dark:bg-zinc-800/80
               border-b dark:border-zinc-700
             ">
               <ActionButtonPanel />
